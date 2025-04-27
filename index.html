@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunal Bhati - Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --primary-color: #58a6ff;
+            --secondary-color: #30363d;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --hover-color: #1f6feb;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+            height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .name h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .name p {
+            margin: 5px 0 0;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .contact {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .contact a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(88, 166, 255, 0.1);
+        }
+        
+        .content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 10px;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* About Section */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill {
+            background-color: rgba(88, 166, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .project-card:hover {
+            border-color: var(--hover-color);
+            transform: translateY(-5px);
+        }
+        
+        .project-thumbnail {
+            height: 160px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+        
+        .project-info {
+            padding: 15px;
+        }
+        
+        .project-info h3 {
+            margin: 0 0 10px;
+            color: var(--primary-color);
+        }
+        
+        .project-info p {
+            margin: 0 0 15px;
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .project-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 20px;
+        }
+        
+        .experience-item h3 {
+            margin: 0 0 5px;
+            font-size: 16px;
+        }
+        
+        .experience-item .company {
+            color: var(--primary-color);
+        }
+        
+        .experience-item .date {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        .experience-item ul {
+            margin: 10px 0 0;
+            padding-left: 20px;
+        }
+        
+        .experience-item li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .tab-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .tab-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .tab-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile">
+                <div class="avatar">KB</div>
+                <div class="name">
+                    <h1>Kunal Bhati</h1>
+                    <p>Computer Science Engineer | Cloud & Docker Enthusiast</p>
+                </div>
+            </div>
+            <div class="contact">
+                <a href="mailto:kunalbhati2305@gmail.com">Email</a>
+                <a href="https://www.linkedin.com/in/kunal-bhati-0814a7145/" target="_blank">LinkedIn</a>
+                <a href="tel:+919548067646">Phone</a>
+            </div>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="about">About</div>
+            <div class="tab" data-tab="projects">Projects</div>
+            <div class="tab" data-tab="experience">Experience</div>
+            <div class="tab" data-tab="education">Education</div>
+        </div>
+        
+        <div class="content">
+            <!-- About Tab -->
+            <div class="tab-content active" id="about">
+                <div class="about-section">
+                    <div class="section">
+                        <h2>Summary</h2>
+                        <p>Computer Science graduate with expertise in Java, Python, and cloud technologies. Passionate about containerization and cloud deployment with hands-on experience in Docker, Kubernetes, and AWS.</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>Technical Skills</h2>
+                        <div class="skills">
+                            <span class="skill">Java</span>
+                            <span class="skill">Python</span>
+                            <span class="skill">AWS EC2</span>
+                            <span class="skill">AWS Lambda</span>
+                            <span class="skill">AWS S3</span>
+                            <span class="skill">Docker</span>
+                            <span class="skill">Kubernetes</span>
+                            <span class="skill">Streamlit</span>
+                            <span class="skill">MySQL</span>
+                            <span class="skill">PostgreSQL</span>
+                            <span class="skill">Linux</span>
+                            <span class="skill">Windows</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>Leadership</h2>
+                    <p>"Leadership is not about being in charge; it's about taking care of those in your charge. True leaders inspire, empower, and lead by example, fostering a vision that others willingly follow."</p>
+                </div>
+            </div>
+            
+            <!-- Projects Tab -->
+            <div class="tab-content" id="projects">
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Docker Basics: Hello World</div>
+                        <div class="project-info">
+                            <h3>Docker Basics: Hello World</h3>
+                            <p>Introduction to Docker with a simple Hello World container.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/1.DOCKER%20BASICS_%20Hello%20World" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Dockerized Streamlit Environment</div>
+                        <div class="project-info">
+                            <h3>Dockerized Streamlit Environment</h3>
+                            <p>Containerized development environment for Streamlit applications.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/2.%20Dockerized%20Streamlit%20Development%20Environment" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Titanic Survival Predictor</div>
+                        <div class="project-info">
+                            <h3>Titanic Survival Predictor</h3>
+                            <p>Containerized Streamlit app for predicting Titanic survival chances.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/3.Titanic%20Survival%20Predictor%20Containerized%20Streamlit%20App" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Containerized MySQL</div>
+                        <div class="project-info">
+                            <h3>Containerized MySQL</h3>
+                            <p>Agile and efficient MySQL deployment using Docker containers.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/4.%20Containerized%20MySQL_%20Agile%20%26%20Efficient%20%F0%9F%90%AC" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Docker Volume Persistence</div>
+                        <div class="project-info">
+                            <h3>Docker Volume Persistence</h3>
+                            <p>Exploring bind mounts with Linux containers for data persistence.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/5.%20Docker%20Volume%20Persistence_%20Bind%20Mounts%20with%20Linux%20Containers" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Docker Bridge Networking</div>
+                        <div class="project-info">
+                            <h3>Docker Bridge Networking</h3>
+                            <p>Balancing isolation and connectivity with Docker bridge networks.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/6.%20Docker%20Bridge_%20Balancing%20Isolation%20%26%20Connectivity" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 7 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Streamlit & PostgreSQL</div>
+                        <div class="project-info">
+                            <h3>Streamlit & PostgreSQL</h3>
+                            <p>Containerized Streamlit application connected to PostgreSQL database.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/7.%20Streamlit%20%26%20PostgreSQL%2C%20Docked" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 8 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Evidently AI in Docker</div>
+                        <div class="project-info">
+                            <h3>Evidently AI in Docker</h3>
+                            <p>Deploying Evidently AI for ML model monitoring in Docker.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/8.%20Evidently%20AI%20Sets%20Sail%20in%20Docker" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 9 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Minikube with Docker</div>
+                        <div class="project-info">
+                            <h3>Minikube with Docker on Windows</h3>
+                            <p>Setting up Minikube with Docker for local Kubernetes development.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/9.%20Minikube%20with%20Docker%20on%20Windows" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 10 -->
+                    <div class="project-card">
+                        <div class="project-thumbnail">Streamlit on AWS EC2</div>
+                        <div class="project-info">
+                            <h3>Streamlit App on AWS EC2</h3>
+                            <p>Deploying a Streamlit application in Docker on AWS EC2.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/kunalbhati99/DockSpace-main/tree/main/10.%20Deploying%20a%20Streamlit%20App%20in%20Docker%20on%20AWS%20EC2" target="_blank">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 
