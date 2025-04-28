@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6c5ce7;       /* Lavender purple */
-            --secondary: #a29bfe;     /* Light lavender */
-            --dark: #2d3436;          /* Dark gray */
-            --light: #f5f6fa;         /* Off-white */
-            --accent: #fd79a8;        /* Pink accent */
+            --primary: #3498db;       /* Primary blue */
+            --secondary: #2980b9;     /* Darker blue */
+            --dark: #2c3e50;          /* Dark blue-gray */
+            --light: #ecf0f1;         /* Light gray */
+            --accent: #e74c3c;        /* Red accent */
         }
         
         * {
@@ -42,10 +42,10 @@
             position: absolute;
             width: 60px;
             height: 60px;
-            background-color: rgba(108, 92, 231, 0.1);
+            background-color: rgba(52, 152, 219, 0.1);
             border-radius: 50%;
             animation: float 15s infinite linear;
-            border: 1px solid rgba(162, 155, 254, 0.3);
+            border: 1px solid rgba(41, 128, 185, 0.3);
         }
         
         @keyframes float {
@@ -53,11 +53,71 @@
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
         }
 
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Header with Profile Photo */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 3rem 2rem;
+            padding: 8rem 2rem 3rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -150,7 +210,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(108, 92, 231, 0.85), rgba(162, 155, 254, 0.85));
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.85), rgba(41, 128, 185, 0.85));
             opacity: 0.8;
             transition: all 0.3s ease;
         }
@@ -182,6 +242,7 @@
         section {
             margin-bottom: 4rem;
             animation: fadeIn 1s ease;
+            padding-top: 2rem;
         }
         
         section h2 {
@@ -249,7 +310,7 @@
         .skill-tag:hover {
             background-color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
         /* Timeline */
@@ -358,7 +419,7 @@
         .project-link:hover {
             background-color: var(--dark);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(45, 52, 54, 0.2);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.2);
         }
 
         /* Footer */
@@ -415,6 +476,26 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .profile-container {
                 flex-direction: column;
                 text-align: center;
@@ -515,8 +596,26 @@
         <div></div>
     </div>
     
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="#" class="logo" id="home-btn">Kunal Bhati</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-user"></i> About</a>
+                <a href="#timeline"><i class="fas fa-briefcase"></i> Experience</a>
+                <a href="#projects"><i class="fas fa-code"></i> Projects</a>
+                <a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </nav>
+    </div>
+    
     <!-- Header with Profile Photo -->
-    <header>
+    <header id="home">
         <div class="profile-container">
             <img src="WhatsApp Image 2025-04-28 at 00.45.45_a92acdd8.jpg" class="profile-photo" alt="Kunal Bhati">
             <div class="header-text">
@@ -525,7 +624,7 @@
                 <div class="contact-info">
                     <a href="mailto:kunalbhati99@gmail.com"><i class="fas fa-envelope"></i> Email</a>
                     <a href="tel:+919999999999"><i class="fas fa-phone"></i> Call</a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="https://github.com/kunalbhati99" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
@@ -627,10 +726,10 @@
                             <li>Maintenance tracking system</li>
                         </ul>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">
+                            <a href="https://estatepopoprop.com" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
-                            <a href="#" class="project-link github-link" target="_blank">
+                            <a href="https://github.com/kunalbhati99/estate-popo-prop" class="project-link github-link" target="_blank">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -751,6 +850,7 @@
                     <div class="project-info">
                         <h3>AWS Certified</h3>
                         <p>AWS Certified Cloud Practitioner</p>
+                        <a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" class="project-link" target="_blank">View Certification</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -760,6 +860,7 @@
                     <div class="project-info">
                         <h3>Docker Certified</h3>
                         <p>Docker Certified Associate</p>
+                        <a href="https://www.docker.com/certification/" class="project-link" target="_blank">View Certification</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -769,7 +870,22 @@
                     <div class="project-info">
                         <h3>Kubernetes Certified</h3>
                         <p>Certified Kubernetes Administrator</p>
+                        <a href="https://www.cncf.io/certification/cka/" class="project-link" target="_blank">View Certification</a>
                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Feel free to reach out if you're looking for a DevOps engineer, have a question, or just want to connect.</p>
+                <div class="contact-info" style="justify-content: center; margin-top: 2rem;">
+                    <a href="mailto:kunalbhati99@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:+919999999999"><i class="fas fa-phone"></i> Call</a>
+                    <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/kunalbhati99" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </section>
@@ -780,37 +896,24 @@
         <div class="footer-links">
             <a href="mailto:kunalbhati99@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="tel:+919999999999"><i class="fas fa-phone"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/kunalbhati99" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         <p>&copy; 2024 Kunal Bhati. All rights reserved.</p>
     </footer>
     
     <script>
-        // Animate timeline items when they come into view
-        const timelineItems = document.querySelectorAll('.timeline-item');
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        timelineItems.forEach(item => {
-            observer.observe(item);
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
         
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                
+                // Close mobile menu if
